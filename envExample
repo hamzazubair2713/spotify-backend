@@ -1,0 +1,6 @@
+CLOUDINARY_NAME = "dz94qcmwn"
+CLOUDINARY_API_KEY = "811264693421241"
+CLOUDINARY_SECERET_KEY = "0aJxHQtqNmuz265xcj65faGrdS0"
+MONGO_PASSWORD ="1NBVjt5lfKo7VynM"
+MONGO_USER ="hamza"
+MONGODB_URI ="mongodb+srv://hamza:1NBVjt5lfKo7VynM@cluster0.ghsn5.mongodb.net"
