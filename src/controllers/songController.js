@@ -2,7 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import songModel from "../models/songModel.js";
 const addSong = async (req, res) => {
   try {
-    const { name, desc, album } = req.body;
+    const { name, desc, albumId } = req.body;
     const audioFile = req.files?.audio[0];
     const imageFile = req.files.image[0];
 
@@ -20,7 +20,7 @@ const addSong = async (req, res) => {
     const songData = {
       name,
       desc,
-      album,
+      albumId,
       image: imageUpload.secure_url,
       file: audioUpload.secure_url,
       duration,
@@ -42,15 +42,26 @@ const listSong = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+const updateSong = async (req, res) => {
+  const { id } = req.params;
+  const { name, desc } = req.body;
+  console.log({ id, name, desc });
+  try {
+    const allSongs = await songModel.findByIdAndUpdate(id, { name, desc });
+    res.json({ success: true, message: "Song updated" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 const removeSong = async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
     await songModel.findByIdAndDelete(id);
-    res.json({ success: true, songs: "Song Removed successfully" });
+    res.json({ success: true, message: "Song Removed successfully" });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
 
-export { addSong, listSong, removeSong };
+export { addSong, listSong, removeSong, updateSong };
