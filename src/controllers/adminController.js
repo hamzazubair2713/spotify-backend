@@ -13,8 +13,8 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   let admin = await adminModel.findOne({ email });
   console.log(admin);
-  console.log(comparePassword(password, admin.password));
-  if (!admin || !comparePassword(password, admin.password)) {
+  console.log(comparePassword(password, admin?.password));
+  if (!admin || !comparePassword(password, admin?.password)) {
     throw new Error("Email or Password is incorrect");
   }
   res.status(200).send({
